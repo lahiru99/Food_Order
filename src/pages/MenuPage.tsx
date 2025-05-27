@@ -5,8 +5,10 @@ import { MenuListView } from '../components/MenuListView';
 import { OrderSummary } from '../components/OrderSummary';
 import { CustomerForm } from '../components/CustomerForm';
 import { FeaturedDishes } from '../components/FeaturedDishes';
-import { FloatingCartButton } from '../components/FloatingCartButton';
+
 import { PackageSelector } from '../components/PackageSelector';
+import { MobileCartModal } from '../components/MobileCartModal';
+import { MobileNavigation } from '../components/MobileNavigation';
 import { getMenu, saveOrder, getOrderSettings } from '../services/firebase';
 import { dummyMenuItems } from '../utils/dummy-data';
 
@@ -150,19 +152,20 @@ export function MenuPage() {
     if (hasItems) {
       setIsOrdering(true);
       setShowMobileCart(false); // Hide mobile cart when proceeding to checkout
+      
+      // Auto-scroll to checkout section on mobile
+      setTimeout(() => {
+        if (orderSectionRef.current) {
+          orderSectionRef.current.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 100);
     }
   };
   
-  const handleFloatingCartClick = () => {
-    // Show the mobile cart
-    setShowMobileCart(true);
-    
-    // If on mobile, scroll to order section
-    if (orderSectionRef.current) {
-      orderSectionRef.current.style.display = 'block';
-      orderSectionRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+
   
   const handleSelectPackage = (packageType: string) => {
     setSelectedPackage(packageType);
@@ -312,7 +315,22 @@ export function MenuPage() {
           )}
         </section>
         
-        <aside className="order-section" ref={orderSectionRef} style={showMobileCart ? { display: 'block' } : {}}>
+        <aside 
+          className={`order-section ${isOrdering ? 'show-mobile' : ''}`} 
+          ref={orderSectionRef}
+        >
+          {isOrdering && (
+            <div className="mobile-checkout-header">
+              <button 
+                className="back-to-menu-btn"
+                onClick={() => setIsOrdering(false)}
+              >
+                ← Back to Menu
+              </button>
+              <h2>Checkout</h2>
+            </div>
+          )}
+          
           <OrderSummary
             items={orderItems}
             total={totalPrice}
@@ -329,9 +347,20 @@ export function MenuPage() {
         </aside>
       </main>
       
-      <FloatingCartButton 
-        items={orderItems} 
-        onClick={handleFloatingCartClick} 
+      {/* Mobile Cart Modal */}
+      <MobileCartModal
+        isOpen={showMobileCart}
+        onClose={() => setShowMobileCart(false)}
+        orderItems={orderItems.filter(item => item.quantity > 0)}
+        total={totalPrice}
+        onRemoveItem={handleRemoveItem}
+        onCheckout={handleProceedToCheckout}
+      />
+      
+      {/* Mobile Navigation */}
+      <MobileNavigation
+        cartItemCount={orderItems.filter(item => item.quantity > 0).length}
+        onCartClick={() => setShowMobileCart(true)}
       />
     </div>
   );

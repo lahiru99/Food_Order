@@ -65,10 +65,6 @@ export function PackageSelector({ onSelectPackage, selectedPackage }: PackageSel
               <ul className="package-details">
                 <li>
                   <span className="detail-icon">✓</span>
-                  <span className="detail-text">Rice included</span>
-                </li>
-                <li>
-                  <span className="detail-icon">✓</span>
                   <span className="detail-text">Poppadoms included</span>
                 </li>
               </ul>
