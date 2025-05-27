@@ -13,7 +13,9 @@ import {
   deleteDoc,
   type DocumentData,
   setDoc,
-  writeBatch
+  writeBatch,
+  serverTimestamp,
+  where
 } from 'firebase/firestore';
 import {
   getStorage,
@@ -328,4 +330,90 @@ export const initializeWithDummyData = async (): Promise<void> => {
 // Helper function to format price
 const formatPrice = (price: number): string => {
   return `$${price.toFixed(2)}`;
-}; 
+};
+
+// Menu operations
+export async function getMenuItems(): Promise<MenuItem[]> {
+  const menuCollection = collection(db, 'menuItems');
+  const menuSnapshot = await getDocs(menuCollection);
+  
+  return menuSnapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  } as MenuItem));
+}
+
+export async function addMenuItem(item: Omit<MenuItem, 'id'>): Promise<MenuItem> {
+  const menuCollection = collection(db, 'menuItems');
+  const docRef = await addDoc(menuCollection, {
+    ...item,
+    createdAt: serverTimestamp()
+  });
+  
+  return {
+    ...item,
+    id: docRef.id
+  };
+}
+
+export async function updateMenuItem(item: MenuItem): Promise<void> {
+  const menuDocRef = doc(db, 'menuItems', item.id);
+  await setDoc(menuDocRef, {
+    ...item,
+    updatedAt: serverTimestamp()
+  }, { merge: true });
+}
+
+export async function deleteMenuItemItems(id: string): Promise<void> {
+  const menuDocRef = doc(db, 'menuItems', id);
+  await deleteDoc(menuDocRef);
+}
+
+// Order operations
+export async function saveOrderItems(order: Omit<Order, 'id' | 'createdAt'>): Promise<string> {
+  const orderCollection = collection(db, 'orders');
+  const docRef = await addDoc(orderCollection, {
+    ...order,
+    createdAt: serverTimestamp()
+  });
+  
+  return docRef.id;
+}
+
+export async function getOrdersItems(): Promise<Order[]> {
+  const orderCollection = collection(db, 'orders');
+  const orderQuery = query(orderCollection, orderBy('createdAt', 'desc'));
+  const orderSnapshot = await getDocs(orderQuery);
+  
+  return orderSnapshot.docs.map(doc => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt instanceof Timestamp ? 
+        data.createdAt.toDate() : 
+        new Date()
+    } as Order;
+  });
+}
+
+// Order settings operations
+export async function getOrderSettingsItems() {
+  const settingsCollection = collection(db, 'settings');
+  const settingsQuery = query(settingsCollection, where('id', '==', 'orderSettings'));
+  const settingsSnapshot = await getDocs(settingsQuery);
+  
+  if (settingsSnapshot.empty) {
+    return { orderDeadline: null };
+  }
+  
+  const settingsDoc = settingsSnapshot.docs[0];
+  const data = settingsDoc.data();
+  
+  return {
+    ...data,
+    orderDeadline: data.orderDeadline instanceof Timestamp ? 
+      data.orderDeadline.toDate() : 
+      null
+  };
+} 

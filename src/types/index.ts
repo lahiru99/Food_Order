@@ -3,6 +3,8 @@ export interface MenuItem {
   name: string;
   price: number;
   description?: string;
+  nameLocalLang?: string;
+  category?: 'non-veg' | 'veg' | 'extras' | 'package' | 'other';
   imageUrl?: string;
 }
 
@@ -13,7 +15,7 @@ export interface OrderItem extends MenuItem {
 export type DeliveryMethod = 'pickup' | 'delivery';
 
 export interface Order {
-  id?: string;
+  id: string;
   customerName: string;
   deliveryMethod: DeliveryMethod;
   address?: string;

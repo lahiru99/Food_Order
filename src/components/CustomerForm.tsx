@@ -5,71 +5,86 @@ interface CustomerFormProps {
   onSubmit: (
     customerName: string,
     deliveryMethod: DeliveryMethod,
-    address?: string
+    address?: string,
+    phoneNumber?: string
   ) => void;
 }
 
 export function CustomerForm({ onSubmit }: CustomerFormProps) {
   const [customerName, setCustomerName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>('pickup');
   const [address, setAddress] = useState('');
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const validate = (): boolean => {
-    const newErrors: Record<string, string> = {};
+  const [errors, setErrors] = useState({
+    customerName: '',
+    phoneNumber: '',
+    address: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     
+    // Reset errors
+    const newErrors = {
+      customerName: '',
+      phoneNumber: '',
+      address: ''
+    };
+    
+    // Validate name
     if (!customerName.trim()) {
       newErrors.customerName = 'Name is required';
     }
     
+    // Validate phone
+    if (!phoneNumber.trim()) {
+      newErrors.phoneNumber = 'Phone number is required';
+    }
+    
+    // Validate address if delivery is selected
     if (deliveryMethod === 'delivery' && !address.trim()) {
       newErrors.address = 'Address is required for delivery';
     }
     
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!validate()) {
+    // Check if there are any errors
+    if (newErrors.customerName || newErrors.phoneNumber || newErrors.address) {
+      setErrors(newErrors);
       return;
     }
     
-    setIsSubmitting(true);
-    
-    try {
-      onSubmit(
-        customerName,
-        deliveryMethod,
-        deliveryMethod === 'delivery' ? address : undefined
-      );
-    } catch (error) {
-      console.error('Error submitting order:', error);
-      setIsSubmitting(false);
-    }
+    // Submit the form
+    onSubmit(customerName, deliveryMethod, address, phoneNumber);
   };
-  
+
   return (
     <form className="customer-form" onSubmit={handleSubmit}>
-      <h2>Delivery Information</h2>
+      <h3>Quick Checkout</h3>
+      <p className="form-subtitle">No account needed - just a few details to complete your order</p>
       
       <div className="form-group">
-        <label htmlFor="customerName">Your Name</label>
+        <label htmlFor="customer-name">Your Name</label>
         <input
           type="text"
-          id="customerName"
+          id="customer-name"
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
           className={errors.customerName ? 'error' : ''}
           placeholder="Enter your full name"
-          disabled={isSubmitting}
         />
-        {errors.customerName && (
-          <div className="error-message">{errors.customerName}</div>
-        )}
+        {errors.customerName && <div className="error-message">{errors.customerName}</div>}
+      </div>
+      
+      <div className="form-group">
+        <label htmlFor="phone-number">Phone Number</label>
+        <input
+          type="tel"
+          id="phone-number"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          className={errors.phoneNumber ? 'error' : ''}
+          placeholder="Enter your phone number"
+        />
+        {errors.phoneNumber && <div className="error-message">{errors.phoneNumber}</div>}
       </div>
       
       <div className="form-group">
@@ -78,23 +93,18 @@ export function CustomerForm({ onSubmit }: CustomerFormProps) {
           <label>
             <input
               type="radio"
-              name="deliveryMethod"
-              value="pickup"
+              name="delivery-method"
               checked={deliveryMethod === 'pickup'}
               onChange={() => setDeliveryMethod('pickup')}
-              disabled={isSubmitting}
             />
             Pickup
           </label>
-          
           <label>
             <input
               type="radio"
-              name="deliveryMethod"
-              value="delivery"
+              name="delivery-method"
               checked={deliveryMethod === 'delivery'}
               onChange={() => setDeliveryMethod('delivery')}
-              disabled={isSubmitting}
             />
             Delivery
           </label>
@@ -109,22 +119,20 @@ export function CustomerForm({ onSubmit }: CustomerFormProps) {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             className={errors.address ? 'error' : ''}
-            placeholder="Enter your full address including street, city, state, and zip code"
+            placeholder="Enter your full address for delivery"
             rows={3}
-            disabled={isSubmitting}
           />
-          {errors.address && (
-            <div className="error-message">{errors.address}</div>
-          )}
+          {errors.address && <div className="error-message">{errors.address}</div>}
         </div>
       )}
       
-      <button 
-        type="submit" 
-        className="submit-btn"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? 'Placing Order...' : 'Place Order'}
+      <div className="checkout-summary">
+        <p>Ready to place your order?</p>
+        <p className="checkout-note">You'll receive a confirmation with your order details</p>
+      </div>
+      
+      <button type="submit" className="submit-btn">
+        Complete Order
       </button>
     </form>
   );

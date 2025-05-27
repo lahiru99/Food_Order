@@ -2,9 +2,11 @@
 export interface MenuItem {
   id: string;
   name: string;
+  nameLocalLang?: string; // Name in local language (Sinhala)
   price: number;
   description?: string;
   imageUrl?: string;
+  category?: 'non-veg' | 'veg' | 'extras' | 'package' | 'other'; // Category for grouping
 }
 
 // Order item extends menu item with quantity
@@ -21,6 +23,7 @@ export interface Order {
   customerName: string;
   deliveryMethod: DeliveryMethod;
   address?: string;
+  phoneNumber?: string;
   items: OrderItem[];
   total: number;
   createdAt: Date;

@@ -1,122 +1,418 @@
 import type { MenuItem, Order } from '../types';
 
-// Sample menu items with images from free stock photo sites
+// Sample menu items based on the actual menu
 export const dummyMenuItems: MenuItem[] = [
+  // Non-Vegetarian Items
   {
-    id: 'item1',
-    name: 'Grilled Chicken Rice Bowl',
-    price: 12.99,
-    description: 'Tender grilled chicken served with aromatic rice, fresh vegetables, and our special sauce. (Special dish)',
+    id: 'non-veg-1',
+    name: 'Pork curry/Pork devilled/Pork stew',
+    nameLocalLang: 'පෝර්ක් කරි/පෝර්ක් ඩෙවල්/පෝර්ක් ස්ටුව්',
+    price: 16,
+    category: 'non-veg',
+    imageUrl: 'https://images.unsplash.com/photo-1624304418997-72106b632af5?auto=format&fit=crop&q=80&w=800'
+  },
+  {
+    id: 'non-veg-2',
+    name: 'Chicken curry/Chicken devilled',
+    nameLocalLang: 'චිකන් කරි/චිකන් ඩෙවල්',
+    price: 16,
+    category: 'non-veg',
     imageUrl: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&q=80&w=800'
   },
   {
-    id: 'item2',
-    name: 'Vegetable Stir Fry',
-    price: 9.99,
-    description: 'Fresh seasonal vegetables stir-fried with tofu in our signature sauce, served with steamed rice.',
-    imageUrl: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800'
+    id: 'non-veg-3',
+    name: 'Tuna fish Spicy curry/Fish Devilled/Coocked with coconut milk/Tuna tempered',
+    nameLocalLang: 'කෙලවල්ලෝ මිරිසට/කිරි මාලු/කෙලවල්ලෝ මාලු තෙල් දාල/මාලු ඩෙවල්',
+    price: 16,
+    category: 'non-veg',
+    imageUrl: 'https://images.unsplash.com/photo-1626102807192-9229644d5daf?auto=format&fit=crop&q=80&w=800'
   },
   {
-    id: 'item3',
-    name: 'Beef Burger with Fries',
-    price: 14.99,
-    description: 'Juicy beef patty with lettuce, tomato, cheese, and our special sauce, served with crispy fries. (Special dish)',
+    id: 'non-veg-4',
+    name: 'Sparats Tempered',
+    nameLocalLang: 'හාල් මැස්සො තෙල් දාලා',
+    price: 16,
+    category: 'non-veg'
+  },
+  {
+    id: 'non-veg-5',
+    name: 'Sausage tempered/Devilled',
+    nameLocalLang: 'චිකන් සොසේජස් ඩෙවල්/තෙල් දාලා',
+    price: 16,
+    category: 'non-veg'
+  },
+  {
+    id: 'non-veg-6',
+    name: 'Saman tempered (brand-Derana)',
+    nameLocalLang: '(දෙරන) සැමන් තෙල් දාල/උයල',
+    price: 16,
+    category: 'non-veg'
+  },
+  {
+    id: 'non-veg-7',
+    name: 'Fried sardines tempered',
+    nameLocalLang: 'හුරුල්ලෝ මාලු බැදලා තෙල් දාලා',
+    price: 16,
+    category: 'non-veg'
+  },
+  {
+    id: 'non-veg-8',
+    name: 'Egg lunu mirisa',
+    nameLocalLang: 'බිත්තර ලුනු මිරිස/කිරි හොදි උබ්බලකඩ සමග',
+    price: 16,
+    category: 'non-veg'
+  },
+  {
+    id: 'non-veg-9',
+    name: 'Chicken Giblet Curry',
+    nameLocalLang: 'චිකන් වැලි බොකු කරිය',
+    price: 16,
+    category: 'non-veg'
+  },
+  {
+    id: 'non-veg-10',
+    name: 'Sparats Curry with potato',
+    nameLocalLang: 'හාල් මැස්සො කරවල අල දාල',
+    price: 16,
+    category: 'non-veg'
+  },
+  {
+    id: 'non-veg-11',
+    name: 'Dry fish tempered/Dry fish curry with potatoes',
+    nameLocalLang: 'කරවල තෙලට/කරවල අල දාල',
+    price: 16,
+    category: 'non-veg'
+  },
+
+  // Vegetarian Items
+  {
+    id: 'veg-1',
+    name: 'Tempered dhal curry',
+    nameLocalLang: 'පරිප්පු තෙම්පරාදුව',
+    price: 12,
+    category: 'veg',
+    imageUrl: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&q=80&w=800'
+  },
+  {
+    id: 'veg-2',
+    name: 'Beet root curry',
+    nameLocalLang: 'බීට් රූට් කරිය',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-3',
+    name: 'Potatoe temepered/Potatoe curry coocked with coconut milk',
+    nameLocalLang: 'අල තෙල් දාල/කිරට',
+    price: 12,
+    category: 'veg',
+    imageUrl: 'https://images.unsplash.com/photo-1508313880080-c4bef0730395?auto=format&fit=crop&q=80&w=800'
+  },
+  {
+    id: 'veg-4',
+    name: 'Pumpkin curry',
+    nameLocalLang: 'වට්ටක්කා කරිය',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-5',
+    name: 'Cabbage tempered/Cabbage curry coocked with coconut milk',
+    nameLocalLang: 'ගෝවා උයලා/තෙල් දාල',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-6',
+    name: 'Carrot curry mixed with potatoes',
+    nameLocalLang: 'කැරට් අල දාලා උයලා',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-7',
+    name: 'Beans curry',
+    nameLocalLang: 'බෝංචි',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-8',
+    name: 'Khale mallum',
+    nameLocalLang: 'කේල් කොල මැල්ලුම',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-9',
+    name: 'Leeks curry mixed with potatoes',
+    nameLocalLang: 'ලීක්ස් අල දාලා උයලා/තෙලට',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-10',
+    name: 'Fried eggplant curry',
+    nameLocalLang: 'වම්බටු බැදලා උයලා',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-11',
+    name: 'Chickpeas curry/tempered',
+    nameLocalLang: 'කඩල කරිය/කඩල තෙල් දාල',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-12',
+    name: 'Soyameat',
+    nameLocalLang: 'සෝයා මීට් කරිය',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-13',
+    name: 'Beetroot salad',
+    nameLocalLang: 'රතු අල සලාදය',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-14',
+    name: 'Cabbage mallum',
+    nameLocalLang: 'ගෝවා මැල්ලුම්',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-15',
+    name: 'Butter Pumpkin tempered',
+    nameLocalLang: 'බටාන තෙල් දාල',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-16',
+    name: 'Carrot Sambal',
+    nameLocalLang: 'කැරට් සම්බෝලය',
+    price: 12,
+    category: 'veg'
+  },
+  {
+    id: 'veg-17',
+    name: 'Carrot tempered',
+    nameLocalLang: 'කැරට් තෙලට',
+    price: 12,
+    category: 'veg'
+  },
+
+  // Extras
+  {
+    id: 'extras-1',
+    name: 'Big shrimp tempered/deviled',
+    nameLocalLang: 'ලොකු ඉස්සෝ තෙල් දාලා/ඩෙවල්',
+    price: 20,
+    category: 'extras',
+    imageUrl: 'https://images.unsplash.com/photo-1625944525533-473f1a3d51e0?auto=format&fit=crop&q=80&w=800'
+  },
+  {
+    id: 'extras-2',
+    name: 'Cashew Curry coocked with coconut milk/tempered',
+    nameLocalLang: 'කජු කරිය/තෙල් දාල',
+    price: 20,
+    category: 'extras'
+  },
+  {
+    id: 'extras-3',
+    name: 'Beef curry/Deviled',
+    nameLocalLang: 'හරක් මස් කරිය/ඩෙවල්/ස්ටුව්',
+    price: 22,
+    category: 'extras',
     imageUrl: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=800'
   },
   {
-    id: 'item4',
-    name: 'Margherita Pizza',
-    price: 11.99,
-    description: 'Classic pizza with tomato sauce, fresh mozzarella, and basil.',
-    imageUrl: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&q=80&w=800'
+    id: 'extras-4',
+    name: 'Lamb curry',
+    nameLocalLang: 'බැටලු මස් කරිය',
+    price: 24,
+    category: 'extras'
   },
   {
-    id: 'item5',
-    name: 'Seafood Paella',
-    price: 16.99,
-    description: 'Traditional Spanish rice dish with prawns, mussels, and squid. (Special dish)',
-    imageUrl: 'https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&q=80&w=800'
+    id: 'extras-5',
+    name: 'Capsicum curry (capsicum filled with maldive fish/onions/Eggs)',
+    nameLocalLang: 'මාලු මිරිස් පුරවල උයල',
+    price: 16,
+    category: 'extras'
   },
   {
-    id: 'item6',
-    name: 'Caesar Salad',
-    price: 8.99,
-    description: 'Fresh romaine lettuce with croutons, parmesan cheese, and our homemade caesar dressing.',
-    imageUrl: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?auto=format&fit=crop&q=80&w=800'
+    id: 'extras-6',
+    name: 'Snake beans curry',
+    nameLocalLang: 'අඹ',
+    price: 14,
+    category: 'extras'
   },
   {
-    id: 'item7',
-    name: 'Chocolate Lava Cake',
-    price: 6.99,
-    description: 'Warm chocolate cake with a gooey center, served with vanilla ice cream.',
-    imageUrl: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80&w=800'
+    id: 'extras-7',
+    name: 'Eggplant moju',
+    nameLocalLang: 'වම්බටු මෝජු',
+    price: 14,
+    category: 'extras'
   },
   {
-    id: 'item8',
-    name: 'Mango Smoothie',
-    price: 4.99,
-    description: 'Refreshing smoothie made with fresh mangoes and yogurt.',
-    imageUrl: 'https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&q=80&w=800'
+    id: 'extras-8',
+    name: 'Egg Vegetable Mixed Noodles',
+    nameLocalLang: 'බිත්තර එළවලු මිශ්‍ර නූඩ්ල්ස්',
+    price: 15,
+    category: 'extras'
+  },
+  {
+    id: 'extras-9',
+    name: 'Coconut sambal Extra (700ml)',
+    nameLocalLang: 'ලොකු සම්බෝල අමතර(700ml)',
+    price: 10,
+    category: 'extras'
+  },
+  {
+    id: 'extras-10',
+    name: 'Papadam Extra (700ml)',
+    nameLocalLang: 'ලොකු පපඩම් (700ml)',
+    price: 5,
+    category: 'extras'
+  },
+  {
+    id: 'extras-11',
+    name: '6 coconut rotis with Lunu mirisa',
+    nameLocalLang: 'ලොකු පොල් රොටී 6 ලුනු මිරිස් සහ මාලු සමග',
+    price: 20,
+    category: 'extras'
+  },
+  {
+    id: 'extras-12',
+    name: '10 big fish cutlets',
+    nameLocalLang: 'ලොකු මාලු කට්ලට් 10',
+    price: 15,
+    category: 'extras'
   }
 ];
 
-// Sample orders for the admin dashboard
-export const dummyOrders: Omit<Order, 'id'>[] = [
+// Dummy orders for admin testing
+export const dummyOrders: Order[] = [
   {
+    id: 'order-001',
     customerName: 'John Smith',
     deliveryMethod: 'delivery',
-    address: '123 Main St, Anytown, CA 12345',
+    address: '123 Main Street, Melbourne VIC 3000',
+    phoneNumber: '+61412345678',
     items: [
-      { ...dummyMenuItems[0], quantity: 2 },
-      { ...dummyMenuItems[3], quantity: 1 },
-      { ...dummyMenuItems[6], quantity: 2 }
+      {
+        id: 'item-1',
+        name: 'Chicken Curry',
+        nameLocalLang: 'කුකුල් මස් කරි',
+        price: 15,
+        quantity: 2,
+        category: 'non-veg'
+      },
+      {
+        id: 'item-2',
+        name: 'Dhal Curry',
+        nameLocalLang: 'පරිප්ප් කරි',
+        price: 8,
+        quantity: 1,
+        category: 'veg'
+      }
     ],
-    total: (dummyMenuItems[0].price * 2) + dummyMenuItems[3].price + (dummyMenuItems[6].price * 2),
-    createdAt: new Date(Date.now() - 86400000) // Yesterday
+    total: 38,
+    createdAt: new Date('2024-01-15T10:30:00')
   },
   {
-    customerName: 'Emily Johnson',
+    id: 'order-002',
+    customerName: 'Sarah Johnson',
     deliveryMethod: 'pickup',
-    address: '',
+    phoneNumber: '+61498765432',
     items: [
-      { ...dummyMenuItems[2], quantity: 1 },
-      { ...dummyMenuItems[7], quantity: 1 }
+      {
+        id: 'package-premium-001',
+        name: 'Premium Package (2 Non-Veg, 2 Veg, Sides)',
+        price: 55,
+        quantity: 1,
+        category: 'package',
+        description: 'Package includes: Fish Curry, Beef Curry and Potato Curry, Green Bean Curry. Also includes coconut sambal, papadam, and 700ml container.'
+      }
     ],
-    total: dummyMenuItems[2].price + dummyMenuItems[7].price,
-    createdAt: new Date(Date.now() - 172800000) // 2 days ago
+    total: 55,
+    createdAt: new Date('2024-01-15T11:45:00')
   },
   {
-    customerName: 'Michael Brown',
+    id: 'order-003',
+    customerName: 'Michael Chen',
     deliveryMethod: 'delivery',
-    address: '456 Oak Ave, Somecity, NY 67890',
+    address: '456 Collins Street, Melbourne VIC 3000',
+    phoneNumber: '+61423456789',
     items: [
-      { ...dummyMenuItems[4], quantity: 1 },
-      { ...dummyMenuItems[5], quantity: 1 }
+      {
+        id: 'item-3',
+        name: 'Fish Curry',
+        nameLocalLang: 'මාළු කරි',
+        price: 18,
+        quantity: 1,
+        category: 'non-veg'
+      },
+      {
+        id: 'item-4',
+        name: 'Rice',
+        nameLocalLang: 'බත්',
+        price: 5,
+        quantity: 2,
+        category: 'extras'
+      }
     ],
-    total: dummyMenuItems[4].price + dummyMenuItems[5].price,
-    createdAt: new Date(Date.now() - 259200000) // 3 days ago
+    total: 28,
+    createdAt: new Date('2024-01-15T12:15:00')
   },
   {
-    customerName: 'Sarah Davis',
+    id: 'order-004',
+    customerName: 'Emma Wilson',
     deliveryMethod: 'pickup',
-    address: '',
+    phoneNumber: '+61434567890',
     items: [
-      { ...dummyMenuItems[1], quantity: 2 },
-      { ...dummyMenuItems[6], quantity: 1 }
+      {
+        id: 'package-standard-001',
+        name: 'Standard Package (1 Non-Veg, 3 Veg, Sides)',
+        price: 50,
+        quantity: 1,
+        category: 'package',
+        description: 'Package includes: Chicken Curry and Potato Curry, Dhal Curry, Green Bean Curry. Also includes coconut sambal, papadam, and 700ml container.'
+      }
     ],
-    total: (dummyMenuItems[1].price * 2) + dummyMenuItems[6].price,
-    createdAt: new Date(Date.now() - 345600000) // 4 days ago
+    total: 50,
+    createdAt: new Date('2024-01-15T13:00:00')
   },
   {
-    customerName: 'David Wilson',
+    id: 'order-005',
+    customerName: 'David Brown',
     deliveryMethod: 'delivery',
-    address: '789 Pine St, Othercity, FL 23456',
+    address: '789 Swanston Street, Melbourne VIC 3000',
+    phoneNumber: '+61445678901',
     items: [
-      { ...dummyMenuItems[0], quantity: 1 },
-      { ...dummyMenuItems[2], quantity: 1 },
-      { ...dummyMenuItems[7], quantity: 2 }
+      {
+        id: 'item-5',
+        name: 'Beef Curry',
+        nameLocalLang: 'හරක් මස් කරි',
+        price: 20,
+        quantity: 1,
+        category: 'non-veg'
+      },
+      {
+        id: 'item-6',
+        name: 'Coconut Sambal',
+        nameLocalLang: 'පොල් සම්බෝල',
+        price: 3,
+        quantity: 2,
+        category: 'extras'
+      }
     ],
-    total: dummyMenuItems[0].price + dummyMenuItems[2].price + (dummyMenuItems[7].price * 2),
-    createdAt: new Date(Date.now() - 432000000) // 5 days ago
+    total: 26,
+    createdAt: new Date('2024-01-15T14:30:00')
   }
 ]; 

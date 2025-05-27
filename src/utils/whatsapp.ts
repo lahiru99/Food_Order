@@ -1,36 +1,32 @@
 import type { Order } from '../types';
 
 /**
- * Format price to currency string
+ * Format price to currency format
  */
-export const formatPrice = (price: number): string => {
-  return `$${price.toFixed(2)}`;
-};
+export function formatPrice(price: number): string {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(price);
+}
 
 /**
  * Generate WhatsApp URL with order details
  */
-export const generateWhatsAppUrl = (order: Order, whatsappNumber: string): string => {
-  // Format items
-  const itemsList = order.items.map(item => 
-    `• ${item.name} x${item.quantity} - ${formatPrice(item.price * item.quantity)}`
-  ).join('\n');
+export function generateWhatsAppUrl(order: Order, phoneNumber: string): string {
+  // Format the message
+  const items = order.items
+    .map(item => `- ${item.quantity}x ${item.name} (${formatPrice(item.price * item.quantity)})`)
+    .join('\n');
   
-  // Create a short order ID for the message
-  const shortOrderId = order.id ? order.id.slice(0, 6) : 'NEW';
+  const message = `*NEW ORDER #${order.id}*\n\n` +
+    `*Customer:* ${order.customerName}\n` +
+    `*Delivery Method:* ${order.deliveryMethod === 'delivery' ? 'Delivery' : 'Pickup'}\n` +
+    (order.address ? `*Address:* ${order.address}\n` : '') +
+    `*Date:* ${order.createdAt.toLocaleString()}\n\n` +
+    `*Items:*\n${items}\n\n` +
+    `*Total:* ${formatPrice(order.total)}`;
   
-  // Format order details
-  const orderDetails = [
-    `*Order Confirmation #${shortOrderId}*`,
-    `\nThank you for your order, ${order.customerName}!`,
-    `\n*Order Details:*\n${itemsList}`,
-    `\n*Total:* ${formatPrice(order.total)}`,
-    `\n*Delivery Method:* ${order.deliveryMethod === 'delivery' ? 'Delivery' : 'Pickup'}`,
-    order.address ? `\n*Delivery Address:* ${order.address}` : '',
-    `\nWe'll prepare your order as soon as possible.`,
-    `\nThank you for your business!`
-  ].join('');
-  
-  // Generate WhatsApp URL
-  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderDetails)}`;
-}; 
+  // Generate the URL
+  return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+} 

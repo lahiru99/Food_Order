@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { MenuItem, OrderItem, DeliveryMethod } from '../types';
-import { MenuItemCard } from '../components/MenuItemCard';
+import { MenuListView } from '../components/MenuListView';
 import { OrderSummary } from '../components/OrderSummary';
 import { CustomerForm } from '../components/CustomerForm';
 import { FeaturedDishes } from '../components/FeaturedDishes';
 import { FloatingCartButton } from '../components/FloatingCartButton';
+import { PackageSelector } from '../components/PackageSelector';
 import { getMenu, saveOrder, getOrderSettings } from '../services/firebase';
-import { generateWhatsAppUrl } from '../utils/whatsapp';
 import { dummyMenuItems } from '../utils/dummy-data';
 
 export function MenuPage() {
@@ -25,9 +25,13 @@ export function MenuPage() {
   const [isDeadlinePassed, setIsDeadlinePassed] = useState(false);
   const [useDummyData, setUseDummyData] = useState(false);
   const [showMobileCart, setShowMobileCart] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
   
-  // WhatsApp business phone number
-  const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '1234567890';
+  // Calculate total price
+  const totalPrice = orderItems.reduce(
+    (sum, item) => sum + item.price * item.quantity, 
+    0
+  );
   
   useEffect(() => {
     // Fetch menu from Firebase
@@ -160,10 +164,21 @@ export function MenuPage() {
     }
   };
   
+  const handleSelectPackage = (packageType: string) => {
+    setSelectedPackage(packageType);
+  };
+  
+  // Helper function to get item quantity
+  const getItemQuantity = (itemId: string): number => {
+    const item = orderItems.find(item => item.id === itemId);
+    return item ? item.quantity : 0;
+  };
+  
   const handleSubmitOrder = async (
     customerName: string,
     deliveryMethod: DeliveryMethod,
-    address?: string
+    address?: string,
+    phoneNumber?: string
   ) => {
     try {
       setIsSubmitting(true);
@@ -182,6 +197,7 @@ export function MenuPage() {
         customerName,
         deliveryMethod,
         address,
+        phoneNumber,
         items: itemsToOrder,
         total
       };
@@ -198,23 +214,23 @@ export function MenuPage() {
         }
       }
       
-      // Generate WhatsApp URL
-      const whatsappUrl = generateWhatsAppUrl(
-        { ...order, id: orderId, createdAt: new Date() },
-        WHATSAPP_NUMBER
-      );
-      
-      // Open WhatsApp in a new window
-      window.open(whatsappUrl, '_blank');
-      
-      // Reset form
+      // Reset form and cart
       setOrderItems([]);
       setIsOrdering(false);
       
-      // Show success message or redirect
-      navigate('/success');
+      // Navigate to success page with order details
+      navigate('/success', { 
+        state: { 
+          orderId,
+          customerName,
+          total,
+          deliveryMethod,
+          items: itemsToOrder
+        }
+      });
     } catch (error) {
       console.error('Error submitting order:', error);
+      alert('There was an error processing your order. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -228,6 +244,15 @@ export function MenuPage() {
       hour: '2-digit',
       minute: '2-digit'
     });
+  };
+  
+  // Add a new function to handle item removal
+  const handleRemoveItem = (itemId: string) => {
+    setOrderItems(prevItems => 
+      prevItems.map(item => 
+        item.id === itemId ? { ...item, quantity: 0 } : item
+      ).filter(item => item.id !== itemId || item.quantity > 0)
+    );
   };
   
   return (
@@ -257,46 +282,44 @@ export function MenuPage() {
             </div>
           ) : (
             <>
-              {specialItems.length > 0 && (
+              {/* Package Selection Section */}
+              <div className="package-selection-section">
+                <h2 className="section-title">Our Special Packages</h2>
+                <p className="section-description">Choose a package and select your favorite dishes</p>
+                
+                <PackageSelector 
+                  onSelectPackage={handleSelectPackage} 
+                  selectedPackage={selectedPackage}
+                />
+              </div>
+              
+              {/* Weekly Special Items Carousel */}
+              {specialItems.length > 0 && !selectedPackage && (
                 <FeaturedDishes 
                   specialItems={specialItems} 
                   onAddToOrder={handleAddToOrder} 
                 />
               )}
               
-              <h2>This Week's Dishes</h2>
-              <div className="menu-grid">
-                {regularItems.map(item => (
-                  <MenuItemCard 
-                    key={item.id}
-                    item={item}
-                    onAddToOrder={handleAddToOrder}
-                  />
-                ))}
-              </div>
+              {/* Menu List View */}
+              <MenuListView 
+                items={menuItems} 
+                onAddToOrder={handleAddToOrder}
+                showLocalLanguage={true}
+                selectedPackage={selectedPackage}
+              />
             </>
           )}
         </section>
         
         <aside className="order-section" ref={orderSectionRef} style={showMobileCart ? { display: 'block' } : {}}>
-          <OrderSummary items={orderItems} />
-          
-          {!isOrdering && (
-            <button 
-              className="checkout-btn"
-              onClick={handleProceedToCheckout}
-              disabled={
-                !orderItems.some(item => item.quantity > 0) || 
-                isLoading || 
-                isDeadlinePassed
-              }
-            >
-              {isDeadlinePassed 
-                ? 'Order deadline passed' 
-                : 'Proceed to Checkout'
-              }
-            </button>
-          )}
+          <OrderSummary
+            items={orderItems}
+            total={totalPrice}
+            onCheckout={handleProceedToCheckout}
+            isDeadlinePassed={isDeadlinePassed}
+            onRemoveItem={handleRemoveItem}
+          />
           
           {isOrdering && (
             <CustomerForm 
@@ -312,4 +335,4 @@ export function MenuPage() {
       />
     </div>
   );
-} 
+}
