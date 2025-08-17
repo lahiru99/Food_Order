@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 interface MobileNavigationProps {
@@ -6,26 +5,26 @@ interface MobileNavigationProps {
   onCartClick: () => void;
 }
 
-export function MobileNavigation({ cartItemCount, onCartClick }: MobileNavigationProps) {
+export function MobileNavigation({
+  cartItemCount,
+  onCartClick,
+}: MobileNavigationProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   const isActive = (path: string) => location.pathname === path;
-  
+
   return (
     <nav className="mobile-nav">
-      <button 
+      <button
         className={`mobile-nav-btn ${isActive('/') ? 'active' : ''}`}
         onClick={() => navigate('/')}
       >
         <span className="mobile-nav-icon">🏠</span>
         <span>Menu</span>
       </button>
-      
-      <button 
-        className="mobile-nav-btn"
-        onClick={onCartClick}
-      >
+
+      <button className="mobile-nav-btn" onClick={onCartClick}>
         <span className="mobile-nav-icon">
           🛒
           {cartItemCount > 0 && (
@@ -36,4 +35,4 @@ export function MobileNavigation({ cartItemCount, onCartClick }: MobileNavigatio
       </button>
     </nav>
   );
-} 
+}

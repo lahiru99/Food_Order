@@ -2,298 +2,547 @@ import type { MenuItem, Order } from '../types';
 
 // Sample menu items based on the actual menu
 export const dummyMenuItems: MenuItem[] = [
-  // Non-Vegetarian Items
+  // Sri Lankan Cuisine - Non-Vegetarian Items
   {
-    id: 'non-veg-1',
-    name: 'Pork curry/Pork devilled/Pork stew',
-    nameLocalLang: 'පෝර්ක් කරි/පෝර්ක් ඩෙවල්/පෝර්ක් ස්ටුව්',
+    id: 'sl-non-veg-1',
+    name: 'Mixed Meat Platter',
     price: 16,
     category: 'non-veg',
-    imageUrl: 'https://images.unsplash.com/photo-1624304418997-72106b632af5?auto=format&fit=crop&q=80&w=800'
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1624304418997-72106b632af5?auto=format&fit=crop&q=80&w=800',
   },
   {
-    id: 'non-veg-2',
-    name: 'Chicken curry/Chicken devilled',
-    nameLocalLang: 'චිකන් කරි/චිකන් ඩෙවල්',
+    id: 'sl-non-veg-2',
+    name: 'Spicy Chicken Dish',
     price: 16,
     category: 'non-veg',
-    imageUrl: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&q=80&w=800'
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&q=80&w=800',
   },
   {
-    id: 'non-veg-3',
-    name: 'Tuna fish Spicy curry/Fish Devilled/Coocked with coconut milk/Tuna tempered',
-    nameLocalLang: 'කෙලවල්ලෝ මිරිසට/කිරි මාලු/කෙලවල්ලෝ මාලු තෙල් දාල/මාලු ඩෙවල්',
+    id: 'sl-non-veg-3',
+    name: 'Seafood Delight',
     price: 16,
     category: 'non-veg',
-    imageUrl: 'https://images.unsplash.com/photo-1626102807192-9229644d5daf?auto=format&fit=crop&q=80&w=800'
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1626102807192-9229644d5daf?auto=format&fit=crop&q=80&w=800',
   },
   {
-    id: 'non-veg-4',
+    id: 'sl-non-veg-4',
     name: 'Sparats Tempered',
-    nameLocalLang: 'හාල් මැස්සො තෙල් දාලා',
     price: 16,
-    category: 'non-veg'
+    category: 'non-veg',
+    cuisine: 'sri-lankan',
   },
   {
-    id: 'non-veg-5',
+    id: 'sl-non-veg-5',
     name: 'Sausage tempered/Devilled',
-    nameLocalLang: 'චිකන් සොසේජස් ඩෙවල්/තෙල් දාලා',
     price: 16,
-    category: 'non-veg'
+    category: 'non-veg',
+    cuisine: 'sri-lankan',
   },
   {
-    id: 'non-veg-6',
+    id: 'sl-non-veg-6',
     name: 'Saman tempered (brand-Derana)',
-    nameLocalLang: '(දෙරන) සැමන් තෙල් දාල/උයල',
     price: 16,
-    category: 'non-veg'
+    category: 'non-veg',
+    cuisine: 'sri-lankan',
   },
   {
-    id: 'non-veg-7',
+    id: 'sl-non-veg-7',
     name: 'Fried sardines tempered',
-    nameLocalLang: 'හුරුල්ලෝ මාලු බැදලා තෙල් දාලා',
     price: 16,
-    category: 'non-veg'
+    category: 'non-veg',
+    cuisine: 'sri-lankan',
   },
   {
-    id: 'non-veg-8',
+    id: 'sl-non-veg-8',
     name: 'Egg lunu mirisa',
-    nameLocalLang: 'බිත්තර ලුනු මිරිස/කිරි හොදි උබ්බලකඩ සමග',
     price: 16,
-    category: 'non-veg'
+    category: 'non-veg',
+    cuisine: 'sri-lankan',
   },
   {
-    id: 'non-veg-9',
+    id: 'sl-non-veg-9',
     name: 'Chicken Giblet Curry',
-    nameLocalLang: 'චිකන් වැලි බොකු කරිය',
     price: 16,
-    category: 'non-veg'
+    category: 'non-veg',
+    cuisine: 'sri-lankan',
   },
   {
-    id: 'non-veg-10',
+    id: 'sl-non-veg-10',
     name: 'Sparats Curry with potato',
-    nameLocalLang: 'හාල් මැස්සො කරවල අල දාල',
     price: 16,
-    category: 'non-veg'
+    category: 'non-veg',
+    cuisine: 'sri-lankan',
   },
   {
-    id: 'non-veg-11',
+    id: 'sl-non-veg-11',
     name: 'Dry fish tempered/Dry fish curry with potatoes',
-    nameLocalLang: 'කරවල තෙලට/කරවල අල දාල',
     price: 16,
-    category: 'non-veg'
+    category: 'non-veg',
+    cuisine: 'sri-lankan',
   },
 
-  // Vegetarian Items
+  // Sri Lankan Cuisine - Vegetarian Items
   {
-    id: 'veg-1',
-    name: 'Tempered dhal curry',
-    nameLocalLang: 'පරිප්පු තෙම්පරාදුව',
+    id: 'sl-veg-1',
+    name: 'Spiced Lentil Bowl',
     price: 12,
     category: 'veg',
-    imageUrl: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&q=80&w=800'
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&q=800',
   },
   {
-    id: 'veg-2',
+    id: 'sl-veg-2',
     name: 'Beet root curry',
-    nameLocalLang: 'බීට් රූට් කරිය',
-    price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-3',
-    name: 'Potatoe temepered/Potatoe curry coocked with coconut milk',
-    nameLocalLang: 'අල තෙල් දාල/කිරට',
     price: 12,
     category: 'veg',
-    imageUrl: 'https://images.unsplash.com/photo-1508313880080-c4bef0730395?auto=format&fit=crop&q=80&w=800'
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&q=80&w=800',
   },
   {
-    id: 'veg-4',
+    id: 'sl-veg-3',
+    name: 'Carrot curry',
+    price: 12,
+    category: 'veg',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1447175008436-170170d8864b?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-veg-4',
+    name: 'Green beans curry',
+    price: 12,
+    category: 'veg',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-veg-5',
+    name: 'Cabbage curry',
+    price: 12,
+    category: 'veg',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-veg-6',
+    name: 'Potato curry',
+    price: 12,
+    category: 'veg',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-veg-7',
+    name: 'Brinjal curry',
+    price: 12,
+    category: 'veg',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-veg-8',
     name: 'Pumpkin curry',
-    nameLocalLang: 'වට්ටක්කා කරිය',
     price: 12,
-    category: 'veg'
+    category: 'veg',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800',
   },
   {
-    id: 'veg-5',
-    name: 'Cabbage tempered/Cabbage curry coocked with coconut milk',
-    nameLocalLang: 'ගෝවා උයලා/තෙල් දාල',
+    id: 'sl-veg-9',
+    name: 'Cucumber curry',
     price: 12,
-    category: 'veg'
+    category: 'veg',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1447175008436-170170d8864b?auto=format&fit=crop&q=80&w=800',
   },
   {
-    id: 'veg-6',
-    name: 'Carrot curry mixed with potatoes',
-    nameLocalLang: 'කැරට් අල දාලා උයලා',
+    id: 'sl-veg-10',
+    name: 'Mushroom curry',
     price: 12,
-    category: 'veg'
+    category: 'veg',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
   },
   {
-    id: 'veg-7',
-    name: 'Beans curry',
-    nameLocalLang: 'බෝංචි',
+    id: 'sl-veg-11',
+    name: 'Mixed vegetable curry',
     price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-8',
-    name: 'Khale mallum',
-    nameLocalLang: 'කේල් කොල මැල්ලුම',
-    price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-9',
-    name: 'Leeks curry mixed with potatoes',
-    nameLocalLang: 'ලීක්ස් අල දාලා උයලා/තෙලට',
-    price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-10',
-    name: 'Fried eggplant curry',
-    nameLocalLang: 'වම්බටු බැදලා උයලා',
-    price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-11',
-    name: 'Chickpeas curry/tempered',
-    nameLocalLang: 'කඩල කරිය/කඩල තෙල් දාල',
-    price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-12',
-    name: 'Soyameat',
-    nameLocalLang: 'සෝයා මීට් කරිය',
-    price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-13',
-    name: 'Beetroot salad',
-    nameLocalLang: 'රතු අල සලාදය',
-    price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-14',
-    name: 'Cabbage mallum',
-    nameLocalLang: 'ගෝවා මැල්ලුම්',
-    price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-15',
-    name: 'Butter Pumpkin tempered',
-    nameLocalLang: 'බටාන තෙල් දාල',
-    price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-16',
-    name: 'Carrot Sambal',
-    nameLocalLang: 'කැරට් සම්බෝලය',
-    price: 12,
-    category: 'veg'
-  },
-  {
-    id: 'veg-17',
-    name: 'Carrot tempered',
-    nameLocalLang: 'කැරට් තෙලට',
-    price: 12,
-    category: 'veg'
+    category: 'veg',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800',
   },
 
-  // Extras
+  // Sri Lankan Cuisine - Extras & Desserts
   {
-    id: 'extras-1',
-    name: 'Big shrimp tempered/deviled',
-    nameLocalLang: 'ලොකු ඉස්සෝ තෙල් දාලා/ඩෙවල්',
-    price: 20,
+    id: 'sl-extras-1',
+    name: 'Coconut sambal',
+    price: 8,
     category: 'extras',
-    imageUrl: 'https://images.unsplash.com/photo-1625944525533-473f1a3d51e0?auto=format&fit=crop&q=80&w=800'
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
   },
   {
-    id: 'extras-2',
-    name: 'Cashew Curry coocked with coconut milk/tempered',
-    nameLocalLang: 'කජු කරිය/තෙල් දාල',
-    price: 20,
-    category: 'extras'
-  },
-  {
-    id: 'extras-3',
-    name: 'Beef curry/Deviled',
-    nameLocalLang: 'හරක් මස් කරිය/ඩෙවල්/ස්ටුව්',
-    price: 22,
-    category: 'extras',
-    imageUrl: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 'extras-4',
-    name: 'Lamb curry',
-    nameLocalLang: 'බැටලු මස් කරිය',
-    price: 24,
-    category: 'extras'
-  },
-  {
-    id: 'extras-5',
-    name: 'Capsicum curry (capsicum filled with maldive fish/onions/Eggs)',
-    nameLocalLang: 'මාලු මිරිස් පුරවල උයල',
-    price: 16,
-    category: 'extras'
-  },
-  {
-    id: 'extras-6',
-    name: 'Snake beans curry',
-    nameLocalLang: 'අඹ',
-    price: 14,
-    category: 'extras'
-  },
-  {
-    id: 'extras-7',
-    name: 'Eggplant moju',
-    nameLocalLang: 'වම්බටු මෝජු',
-    price: 14,
-    category: 'extras'
-  },
-  {
-    id: 'extras-8',
-    name: 'Egg Vegetable Mixed Noodles',
-    nameLocalLang: 'බිත්තර එළවලු මිශ්‍ර නූඩ්ල්ස්',
-    price: 15,
-    category: 'extras'
-  },
-  {
-    id: 'extras-9',
-    name: 'Coconut sambal Extra (700ml)',
-    nameLocalLang: 'ලොකු සම්බෝල අමතර(700ml)',
-    price: 10,
-    category: 'extras'
-  },
-  {
-    id: 'extras-10',
-    name: 'Papadam Extra (700ml)',
-    nameLocalLang: 'ලොකු පපඩම් (700ml)',
+    id: 'sl-extras-2',
+    name: 'Papadam',
     price: 5,
-    category: 'extras'
+    category: 'extras',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800',
   },
   {
-    id: 'extras-11',
-    name: '6 coconut rotis with Lunu mirisa',
-    nameLocalLang: 'ලොකු පොල් රොටී 6 ලුනු මිරිස් සහ මාලු සමග',
+    id: 'sl-extras-3',
+    name: 'Rice',
+    price: 6,
+    category: 'extras',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-extras-4',
+    name: 'Bread',
+    price: 4,
+    category: 'extras',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1447175008436-170170d8864b?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-extras-5',
+    name: 'Roti',
+    price: 4,
+    category: 'extras',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-extras-6',
+    name: 'String hoppers',
+    price: 6,
+    category: 'extras',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-extras-7',
+    name: 'Hoppers',
+    price: 5,
+    category: 'extras',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1447175008436-170170d8864b?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-extras-8',
+    name: 'Milk tea',
+    price: 3,
+    category: 'extras',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-extras-9',
+    name: 'Coffee',
+    price: 3,
+    category: 'extras',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'sl-extras-10',
+    name: 'Ice cream',
+    price: 4,
+    category: 'extras',
+    cuisine: 'sri-lankan',
+    imageUrl:
+      'https://images.unsplash.com/photo-1447175008436-170170d8864b?auto=format&fit=crop&q=80&w=800',
+  },
+];
+
+// Japanese Cuisine
+export const japaneseMenuItems: MenuItem[] = [
+  {
+    id: 'jp-non-veg-1',
+    name: 'Chicken Teriyaki',
+    price: 18,
+    category: 'non-veg',
+    cuisine: 'japanese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'jp-non-veg-2',
+    name: 'Salmon Sushi Roll',
+    price: 16,
+    category: 'non-veg',
+    cuisine: 'japanese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'jp-non-veg-3',
+    name: 'Beef Ramen',
     price: 20,
-    category: 'extras'
+    category: 'non-veg',
+    cuisine: 'japanese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&q=80&w=800',
   },
   {
-    id: 'extras-12',
-    name: '10 big fish cutlets',
-    nameLocalLang: 'ලොකු මාලු කට්ලට් 10',
+    id: 'jp-veg-1',
+    name: 'Vegetable Tempura',
+    price: 14,
+    category: 'veg',
+    cuisine: 'japanese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'jp-veg-2',
+    name: 'Miso Soup',
+    price: 8,
+    category: 'veg',
+    cuisine: 'japanese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'jp-extras-1',
+    name: 'Edamame',
+    price: 6,
+    category: 'extras',
+    cuisine: 'japanese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1447175008436-170170d8864b?auto=format&fit=crop&q=80&w=800',
+  },
+];
+
+// Chinese Cuisine
+export const chineseMenuItems: MenuItem[] = [
+  {
+    id: 'cn-non-veg-1',
+    name: 'Kung Pao Chicken',
+    price: 17,
+    category: 'non-veg',
+    cuisine: 'chinese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'cn-non-veg-2',
+    name: 'Sweet & Sour Pork',
+    price: 16,
+    category: 'non-veg',
+    cuisine: 'chinese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1624304418997-72106b632af5?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'cn-veg-1',
+    name: 'Stir-Fried Vegetables',
+    price: 12,
+    category: 'veg',
+    cuisine: 'chinese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'cn-veg-2',
+    name: 'Fried Rice',
+    price: 10,
+    category: 'veg',
+    cuisine: 'chinese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'cn-extras-1',
+    name: 'Spring Rolls',
+    price: 8,
+    category: 'extras',
+    cuisine: 'chinese',
+    imageUrl:
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800',
+  },
+];
+
+// Mexican Cuisine
+export const mexicanMenuItems: MenuItem[] = [
+  {
+    id: 'mx-non-veg-1',
+    name: 'Chicken Tacos',
     price: 15,
-    category: 'extras'
-  }
+    category: 'non-veg',
+    cuisine: 'mexican',
+    imageUrl:
+      'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'mx-non-veg-2',
+    name: 'Beef Burrito',
+    price: 18,
+    category: 'non-veg',
+    cuisine: 'mexican',
+    imageUrl:
+      'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'mx-veg-1',
+    name: 'Vegetarian Quesadilla',
+    price: 13,
+    category: 'veg',
+    cuisine: 'mexican',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'mx-veg-2',
+    name: 'Guacamole & Chips',
+    price: 9,
+    category: 'veg',
+    cuisine: 'mexican',
+    imageUrl:
+      'https://images.unsplash.com/photo-1447175008436-170170d8864b?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'mx-extras-1',
+    name: 'Salsa Verde',
+    price: 4,
+    category: 'extras',
+    cuisine: 'mexican',
+    imageUrl:
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800',
+  },
+];
+
+// Italian Cuisine
+export const italianMenuItems: MenuItem[] = [
+  {
+    id: 'it-non-veg-1',
+    name: 'Margherita Pizza',
+    price: 22,
+    category: 'non-veg',
+    cuisine: 'italian',
+    imageUrl:
+      'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'it-non-veg-2',
+    name: 'Chicken Alfredo Pasta',
+    price: 19,
+    category: 'non-veg',
+    cuisine: 'italian',
+    imageUrl:
+      'https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'it-veg-1',
+    name: 'Vegetarian Lasagna',
+    price: 16,
+    category: 'veg',
+    cuisine: 'italian',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'it-veg-2',
+    name: 'Bruschetta',
+    price: 11,
+    category: 'veg',
+    cuisine: 'italian',
+    imageUrl:
+      'https://images.unsplash.com/photo-1447175008436-170170d8864b?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'it-extras-1',
+    name: 'Garlic Bread',
+    price: 6,
+    category: 'extras',
+    cuisine: 'italian',
+    imageUrl:
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800',
+  },
+];
+
+// Indian Cuisine
+export const indianMenuItems: MenuItem[] = [
+  {
+    id: 'in-non-veg-1',
+    name: 'Butter Chicken',
+    price: 18,
+    category: 'non-veg',
+    cuisine: 'indian',
+    imageUrl:
+      'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'in-non-veg-2',
+    name: 'Lamb Curry',
+    price: 20,
+    category: 'non-veg',
+    cuisine: 'indian',
+    imageUrl:
+      'https://images.unsplash.com/photo-1624304418997-72106b632af5?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'in-veg-1',
+    name: 'Palak Paneer',
+    price: 14,
+    category: 'veg',
+    cuisine: 'indian',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'in-veg-2',
+    name: 'Dal Makhani',
+    price: 12,
+    category: 'veg',
+    cuisine: 'indian',
+    imageUrl:
+      'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 'in-extras-1',
+    name: 'Naan Bread',
+    price: 5,
+    category: 'extras',
+    cuisine: 'indian',
+    imageUrl:
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800',
+  },
+];
+
+// Combine all cuisines
+export const allMenuItems: MenuItem[] = [
+  ...dummyMenuItems, // Sri Lankan
+  ...japaneseMenuItems,
+  ...chineseMenuItems,
+  ...mexicanMenuItems,
+  ...italianMenuItems,
+  ...indianMenuItems,
 ];
 
 // Dummy orders for admin testing
@@ -302,28 +551,28 @@ export const dummyOrders: Order[] = [
     id: 'order-001',
     customerName: 'John Smith',
     deliveryMethod: 'delivery',
-    address: '123 Main Street, Melbourne VIC 3000',
+    address: '123 Oak Avenue, Downtown',
     phoneNumber: '+61412345678',
     items: [
       {
-        id: 'item-1',
-        name: 'Chicken Curry',
-        nameLocalLang: 'කුකුල් මස් කරි',
+        id: 'sl-non-veg-2',
+        name: 'Spicy Chicken Dish',
         price: 15,
         quantity: 2,
-        category: 'non-veg'
+        category: 'non-veg',
+        cuisine: 'sri-lankan',
       },
       {
-        id: 'item-2',
-        name: 'Dhal Curry',
-        nameLocalLang: 'පරිප්ප් කරි',
+        id: 'sl-veg-1',
+        name: 'Lentil Curry',
         price: 8,
         quantity: 1,
-        category: 'veg'
-      }
+        category: 'veg',
+        cuisine: 'sri-lankan',
+      },
     ],
     total: 38,
-    createdAt: new Date('2024-01-15T10:30:00')
+    createdAt: new Date('2024-01-15T10:30:00'),
   },
   {
     id: 'order-002',
@@ -332,43 +581,43 @@ export const dummyOrders: Order[] = [
     phoneNumber: '+61498765432',
     items: [
       {
-        id: 'package-premium-001',
-        name: 'Premium Package (2 Non-Veg, 2 Veg, Sides)',
-        price: 55,
-        quantity: 1,
-        category: 'package',
-        description: 'Package includes: Fish Curry, Beef Curry and Potato Curry, Green Bean Curry. Also includes coconut sambal, papadam, and 700ml container.'
-      }
+        id: 'sl-non-veg-1',
+        name: 'Mixed Meat Platter',
+        price: 16,
+        quantity: 2,
+        category: 'non-veg',
+        cuisine: 'sri-lankan',
+      },
     ],
-    total: 55,
-    createdAt: new Date('2024-01-15T11:45:00')
+    total: 32,
+    createdAt: new Date('2024-01-15T11:45:00'),
   },
   {
     id: 'order-003',
     customerName: 'Michael Chen',
     deliveryMethod: 'delivery',
-    address: '456 Collins Street, Melbourne VIC 3000',
+    address: '456 Pine Street, Midtown',
     phoneNumber: '+61423456789',
     items: [
       {
-        id: 'item-3',
-        name: 'Fish Curry',
-        nameLocalLang: 'මාළු කරි',
+        id: 'sl-non-veg-3',
+        name: 'Seafood Delight',
         price: 18,
         quantity: 1,
-        category: 'non-veg'
+        category: 'non-veg',
+        cuisine: 'sri-lankan',
       },
       {
-        id: 'item-4',
-        name: 'Rice',
-        nameLocalLang: 'බත්',
+        id: 'sl-extras-3',
+        name: 'Steamed Rice',
         price: 5,
         quantity: 2,
-        category: 'extras'
-      }
+        category: 'extras',
+        cuisine: 'sri-lankan',
+      },
     ],
     total: 28,
-    createdAt: new Date('2024-01-15T12:15:00')
+    createdAt: new Date('2024-01-15T12:15:00'),
   },
   {
     id: 'order-004',
@@ -377,42 +626,42 @@ export const dummyOrders: Order[] = [
     phoneNumber: '+61434567890',
     items: [
       {
-        id: 'package-standard-001',
-        name: 'Standard Package (1 Non-Veg, 3 Veg, Sides)',
-        price: 50,
-        quantity: 1,
-        category: 'package',
-        description: 'Package includes: Chicken Curry and Potato Curry, Dhal Curry, Green Bean Curry. Also includes coconut sambal, papadam, and 700ml container.'
-      }
+        id: 'sl-veg-1',
+        name: 'Spiced Lentil Bowl',
+        price: 12,
+        quantity: 2,
+        category: 'veg',
+        cuisine: 'sri-lankan',
+      },
     ],
-    total: 50,
-    createdAt: new Date('2024-01-15T13:00:00')
+    total: 24,
+    createdAt: new Date('2024-01-15T13:00:00'),
   },
   {
     id: 'order-005',
     customerName: 'David Brown',
     deliveryMethod: 'delivery',
-    address: '789 Swanston Street, Melbourne VIC 3000',
+    address: '789 Maple Drive, Uptown',
     phoneNumber: '+61445678901',
     items: [
       {
-        id: 'item-5',
-        name: 'Beef Curry',
-        nameLocalLang: 'හරක් මස් කරි',
+        id: 'in-non-veg-2',
+        name: 'Tender Meat Curry',
         price: 20,
         quantity: 1,
-        category: 'non-veg'
+        category: 'non-veg',
+        cuisine: 'indian',
       },
       {
-        id: 'item-6',
-        name: 'Coconut Sambal',
-        nameLocalLang: 'පොල් සම්බෝල',
+        id: 'sl-extras-1',
+        name: 'Fresh Coconut Chutney',
         price: 3,
         quantity: 2,
-        category: 'extras'
-      }
+        category: 'extras',
+        cuisine: 'sri-lankan',
+      },
     ],
     total: 26,
-    createdAt: new Date('2024-01-15T14:30:00')
-  }
-]; 
+    createdAt: new Date('2024-01-15T14:30:00'),
+  },
+];

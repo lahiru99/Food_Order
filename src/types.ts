@@ -7,6 +7,7 @@ export interface MenuItem {
   description?: string;
   imageUrl?: string;
   category?: 'non-veg' | 'veg' | 'extras' | 'package' | 'other'; // Category for grouping
+  cuisine?: string; // Cuisine type (e.g., 'sri-lankan', 'japanese', 'chinese')
 }
 
 // Order item extends menu item with quantity
@@ -27,4 +28,4 @@ export interface Order {
   items: OrderItem[];
   total: number;
   createdAt: Date;
-} 
+}
