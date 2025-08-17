@@ -366,6 +366,21 @@ export function MenuPage() {
         onCheckout={handleProceedToCheckout}
       />
 
+      {/* Floating Cart Button for Mobile */}
+      <button
+        className="floating-cart"
+        onClick={() => setShowMobileCart(true)}
+        aria-label="Open cart"
+        title="View cart"
+      >
+        🛒
+        {orderItems.filter((item) => item.quantity > 0).length > 0 && (
+          <span className="cart-badge">
+            {orderItems.filter((item) => item.quantity > 0).length}
+          </span>
+        )}
+      </button>
+
       {/* Mobile Navigation */}
       <MobileNavigation
         cartItemCount={orderItems.filter((item) => item.quantity > 0).length}

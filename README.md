@@ -136,6 +136,25 @@ src/
 4. **Checkout Process**: Simple form for delivery/pickup details
 5. **Order Confirmation**: Success page with order details
 
+## 📱 Screenshots
+
+### Customer Interface
+
+![Cuisine Selection](public/pics/Screenshot_1.jpg)
+_Interactive cuisine selection grid with multiple cuisine options_
+![Menu View](public/pics/Screenshot_2.jpg)
+_Clean menu with quantity controls and categorized dishes_
+![Mobile Cart](public/pics/Screenshot_3.jpg)
+_Bottom sheet cart modal for order management_
+
+![Checkout Form](public/pics/Screenshot_4.jpg)
+_Simple delivery/pickup form for completing orders_
+
+### Admin Dashboard
+
+![Orders Management](public/pics/Screenshot_5.jpg)
+_Admin dashboard with order management and sample data_
+
 ### Admin Features
 
 1. **Order Dashboard**: View and manage all customer orders
